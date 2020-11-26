@@ -33,7 +33,7 @@ export class RecipeListComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onEmittedRecipe(emittedRecipe: Recipe): void {
+  onClick(emittedRecipe: Recipe): void {
     this.recipeEmitter.emit(emittedRecipe);
   }
 }
