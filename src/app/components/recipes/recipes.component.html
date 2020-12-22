@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-md-5">
-    <app-recipe-list (recipeEmitter)="onEmittedRecipe($event)"></app-recipe-list>
+    <app-recipe-list></app-recipe-list>
   </div>
   <div class="col-md-7">
     <app-recipe-detail
       *ngIf="featuredRecipe; else infoText"
       [recipe]="featuredRecipe"></app-recipe-detail>
     <ng-template #infoText>
-      <p>Please select a Recipe</p>
+      <h4>Please select a Recipe</h4>
     </ng-template>
   </div>
 </div>

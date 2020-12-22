@@ -1,5 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Recipe } from 'src/app/model/recipe.model';
+import {RecipeService} from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -7,33 +8,15 @@ import { Recipe } from 'src/app/model/recipe.model';
   styleUrls: ['./recipe-list.component.css'],
 })
 export class RecipeListComponent implements OnInit {
-  @Output()
-  public recipeEmitter = new EventEmitter<Recipe>();
+  recipes: Array<Recipe> = [];
 
+  constructor(private recipeService: RecipeService) {}
 
-  recipes: Array<Recipe> = [
-    new Recipe(
-      'Nasi',
-      'very nice',
-      'https://worstenbroodenwijn.nl/wp-content/uploads/2017/10/Nasi-met-courgette-en-buikspek.jpg'
-    ),
-    new Recipe(
-      'Bami',
-      'super nice',
-      'https://worstenbroodenwijn.nl/wp-content/uploads/2017/10/Nasi-met-courgette-en-buikspek.jpg'
-    ),
-    new Recipe(
-      'broccoli',
-      'ook lekker',
-      'https://worstenbroodenwijn.nl/wp-content/uploads/2017/10/Nasi-met-courgette-en-buikspek.jpg'
-    ),
-  ];
+  ngOnInit(): void {
+    this.recipes = this.recipeService.getRecipes();
+  }
 
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  onClick(emittedRecipe: Recipe): void {
-    this.recipeEmitter.emit(emittedRecipe);
+  onClick(selectedRecipe: Recipe): void {
+    this.recipeService.recipeSelected.emit(selectedRecipe);
   }
 }
