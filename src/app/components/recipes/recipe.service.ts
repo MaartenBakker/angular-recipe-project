@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Recipe } from '../../model/recipe.model';
 import { EventEmitter } from '@angular/core';
 import {Ingredient} from '../../model/ingredient.model';
+import {ShoppingListService} from '../shopping-list/shopping-list.service';
 
 @Injectable()
 export class RecipeService {
@@ -37,7 +38,7 @@ export class RecipeService {
     ),
   ];
 
-  constructor() { }
+  constructor(private shoppingListService: ShoppingListService) { }
 
   getRecipes(): Array<Recipe> {
     return this.recipes.slice(); // slice() used to return copy instead of direct reference
